@@ -1,5 +1,6 @@
 from itertools import permutations
 
+n = int(input("Enter dimensions of chess board: "))
 def board():
     chess = []
     for i in range(n):
@@ -83,22 +84,23 @@ def hill_diag(lst):
     return only_hill
 
 
+def main():
+    #n = int(input("Enter dimensions of chess board"))
+    column =  range(n)
+    #list_queens = []
+    list_queens_final = []
+    for i in permutations(column):
+        list_queens = []
+        #print(i)
+        for j in range(n):
+            queen_pos = [ j, i[j]]
+            list_queens.append(queen_pos)
+        #print(list_queens)
+        list_queens_final.append(list_queens)
+    #print(list_queens_final)
 
-n = int(input("Enter dimensions of chess board"))
-column =  range(n)
-#list_queens = []
-list_queens_final = []
-for i in permutations(column):
-    list_queens = []
-    #print(i)
-    for j in range(n):
-        queen_pos = [ j, i[j]]
-        list_queens.append(queen_pos)
-    #print(list_queens)
-    list_queens_final.append(list_queens)
-#print(list_queens_final)
-
-dale = dale_diag(list_queens_final)
-hill = hill_diag(dale)
-op(hill)
+    dale = dale_diag(list_queens_final)
+    hill = hill_diag(dale)
+    op(hill)
 #board()
+main()
