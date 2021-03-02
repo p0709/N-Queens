@@ -1,6 +1,9 @@
 from itertools import permutations
+from Nqueensmodule import *
+import os
+import sys
 
-n = int(input("Enter dimensions of chess board: "))
+#n = int(input("Enter dimensions of chess board: "))
 def board():
     chess = []
     for i in range(n):
@@ -101,6 +104,75 @@ def main():
 
     dale = dale_diag(list_queens_final)
     hill = hill_diag(dale)
-    op(hill)
+    if (len(hill) != 0):
+        op(hill)
+    else:
+        print("No solution exists for {} Queen Problem".format(n))
+
+def greater_than_9():
+    #N=int(input('Enter the size of the board : '))
+    N=n
+    board=[[0 for i in range(N)] for i in range(N)]
+    print('Your board : ')
+    for i in range(N):
+        for j in range(N):
+            print(board[i][j],end='  ')
+        print()
+        print()
+
+    if solveNQueens(board,0,N)==True:
+        print('The solution to {} Queens problem is:'.format(N))
+        for r in range(N):
+            for c in range(N):
+                print(board[r][c],end='  ')
+            print()
+            print()
+    else:
+        print('Impossible to solve\nThe Queens cannot be placed ')
+
+def home_page():
+    #import os
+    welcome = "N-Queens Problem"
+    print(welcome.center(100," "))
+    description = """The N-Queens Problem is a classical problem of chess. Here N Queens are to be placed on an N * N chessboard \nin such a way that no queens attack each other. A Queen can attack other Queens if its placed on the same row,\ncolumn or on its diagonals. The solutions for the problem increases exponentially as n increases. Our project\ndisplays all the solutions for the problem upto n = 9. For any n greater, we have developed a code to provide\njust one solution satisfying the constraints. """
+    print(description)
+    clr = input("\nPress Enter to contine: ")
+    if (clr != None):
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+def check_n(n1):
+    if (n1.isdigit() == True):
+        #n1 = int(n1)
+        return True
+    else:
+        return False
+
 #board()
-main()
+home_page()
+loop = True
+while loop:
+    n = input("Enter dimensions of chess board: ")
+    #print(check_n(n))
+    if (check_n(n) == True):
+        n = int(n)
+        if (n <= 9):
+            main()
+        else:
+            greater_than_9()
+        print("Would you like to try again?\nPress y to continue and any other key to exit. ")
+        c = input()
+        if (c == 'y' or c == 'Y'):
+            loop = True
+            os.system('cls' if os.name == 'nt' else 'clear')
+        else:
+            loop = False
+            sys.exit()
+    else:
+        print("Invalid input. \nPress y to try again or any other key to exit. ")
+        choice = input()
+        if (choice == 'y' or choice == 'Y'):
+            loop = True
+            os.system('cls' if os.name == 'nt' else 'clear')
+        else:
+            loop = False
+            sys.exit()
